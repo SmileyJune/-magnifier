@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>放大镜</title>
+	<style>
+      *{
+      	padding: 0;
+      	margin: 0;
+      	box-sizing: border-box;
+      }
+      #main{
+      	width: 600px;
+      	height: 600px;
+      	margin: 0 auto;
+      }
+      #left{
+        width: 100%;
+        height: 300px;
+        background-image: url(./img/football.jpg);
+        background-size: 100% 100%;
+        background-repeat: no-repeat;
+        position: relative;
+      }
+
+      #small{
+      	width: 200px;
+      	height: 100px;
+      	background-color: rgba(0,0,0,0.3);
+      	position: absolute;
+      	top: 0;
+      	left: 0;
+      	display: none;
+      }
+
+      #right{
+      	width: 100%;
+      	height: 300px;
+      	background-image: url(./img/football.jpg);
+      	background-size: 300% 300%;
+        background-repeat: no-repeat;
+        display: none;
+      }
+
+	</style>
+</head>
+<body>
+	<div id="main">
+      <div id="left">
+         <div id="small"></div>
+      </div>
+      <div id="right"></div>
+	</div>
+
+    
+    <script>
+        var main = document.getElementById("main");
+        var left = document.getElementById("left");
+        var right = document.getElementById("right");
+        var small = document.getElementById("small");
+
+
+        left.onmousemove = function(e){
+             small.style.display = "block";
+             right.style.display = "block";
+             x = e.clientX - left.offsetLeft - 100;
+             y = e.clientY - left.offsetTop - 50;
+             if (x<0) {
+             	x = 0;
+             }else if (x>400) {
+             	x = 400;
+             }
+
+             if (y<0) {
+             	y = 0;
+             }else if (y>200) {
+             	y = 200;
+             }
+
+             small.style.left = x + "px";
+             small.style.top = y + "px";
+
+
+             right.style.backgroundPositionX = -3*x + "px";
+             right.style.backgroundPositionY = -3*y + "px";
+
+
+        }
+
+        left.onmouseleave = function(){
+            small.style.display = "none";
+            right.style.display = "none";
+        }
+
+
+
+
+    </script>
+
+</body>
+</html>
